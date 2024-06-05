@@ -3,15 +3,16 @@ import 'package:google_fonts/google_fonts.dart';
 
 class HomePageContent extends StatefulWidget {
   final List bookmarkedArticles;
+  final Function(Map) onBookmarkRemoved;
 
-  HomePageContent({required this.bookmarkedArticles});
+  HomePageContent(
+      {required this.bookmarkedArticles, required this.onBookmarkRemoved});
 
   @override
   _HomePageContentState createState() => _HomePageContentState();
 }
 
 class _HomePageContentState extends State<HomePageContent> {
-  // Menggunakan data statis untuk testing
   List articles = [
     {'title': 'Berita 1', 'description': 'Deskripsi berita 1'},
     {'title': 'Berita 2', 'description': 'Deskripsi berita 2'},
@@ -76,6 +77,7 @@ class _HomePageContentState extends State<HomePageContent> {
                     setState(() {
                       if (widget.bookmarkedArticles.contains(articles[index])) {
                         widget.bookmarkedArticles.remove(articles[index]);
+                        widget.onBookmarkRemoved(articles[index]);
                       } else {
                         widget.bookmarkedArticles.add(articles[index]);
                       }

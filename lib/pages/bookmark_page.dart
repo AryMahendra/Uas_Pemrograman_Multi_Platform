@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 class BookmarkPage extends StatelessWidget {
   final List bookmarkedArticles;
+  final Function(Map) onRemoveBookmark;
 
-  BookmarkPage({required this.bookmarkedArticles});
+  BookmarkPage(
+      {required this.bookmarkedArticles, required this.onRemoveBookmark});
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +27,12 @@ class BookmarkPage extends StatelessWidget {
                 return ListTile(
                   title: Text(bookmarkedArticles[index]['title']),
                   subtitle: Text(bookmarkedArticles[index]['description']),
+                  trailing: IconButton(
+                    icon: Icon(Icons.delete, color: Colors.red),
+                    onPressed: () {
+                      onRemoveBookmark(bookmarkedArticles[index]);
+                    },
+                  ),
                 );
               },
             ),
