@@ -1,36 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class HomePageContent extends StatefulWidget {
+  final List bookmarkedArticles;
+
+  HomePageContent({required this.bookmarkedArticles});
+
   @override
   _HomePageContentState createState() => _HomePageContentState();
 }
 
 class _HomePageContentState extends State<HomePageContent> {
-  List articles = [];
-
-  @override
-  void initState() {
-    super.initState();
-    fetchArticles();
-  }
-
-  fetchArticles() async {
-    final response =
-        await http.get(Uri.parse('https://api.yournewsapi.com/articles'));
-    if (response.statusCode == 200) {
-      setState(() {
-        articles = json.decode(response.body)['articles'];
-      });
-    } else {
-      throw Exception('Failed to load articles');
-    }
-  }
+  // Menggunakan data statis untuk testing
+  List articles = [
+    {'title': 'Berita 1', 'description': 'Deskripsi berita 1'},
+    {'title': 'Berita 2', 'description': 'Deskripsi berita 2'},
+    {'title': 'Berita 3', 'description': 'Deskripsi berita 3'},
+  ];
 
   @override
   Widget build(BuildContext context) {
+    print('Building HomePageContent'); // Log untuk debug
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -53,7 +43,6 @@ class _HomePageContentState extends State<HomePageContent> {
               ),
             ),
           ),
-          // Berita Sedang Tren
           Container(
             padding: EdgeInsets.all(16.0),
             child: Text(
@@ -61,7 +50,6 @@ class _HomePageContentState extends State<HomePageContent> {
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
-          // Berita Baru
           Container(
             padding: EdgeInsets.all(16.0),
             child: Text(
@@ -69,7 +57,6 @@ class _HomePageContentState extends State<HomePageContent> {
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
-          // List of articles
           ListView.builder(
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
@@ -78,6 +65,23 @@ class _HomePageContentState extends State<HomePageContent> {
               return ListTile(
                 title: Text(articles[index]['title']),
                 subtitle: Text(articles[index]['description']),
+                trailing: IconButton(
+                  icon: Icon(
+                    Icons.bookmark_border,
+                    color: widget.bookmarkedArticles.contains(articles[index])
+                        ? Colors.amber
+                        : Colors.grey,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      if (widget.bookmarkedArticles.contains(articles[index])) {
+                        widget.bookmarkedArticles.remove(articles[index]);
+                      } else {
+                        widget.bookmarkedArticles.add(articles[index]);
+                      }
+                    });
+                  },
+                ),
               );
             },
           ),

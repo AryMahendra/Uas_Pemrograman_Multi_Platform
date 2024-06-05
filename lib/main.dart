@@ -27,26 +27,29 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
+  List bookmarkedArticles = [];
 
-  static List<Widget> _widgetOptions = <Widget>[
-    HomePageContent(),
-    BookmarkPage(),
-  ];
+  List<Widget> _widgetOptions() => <Widget>[
+        HomePageContent(bookmarkedArticles: bookmarkedArticles),
+        BookmarkPage(bookmarkedArticles: bookmarkedArticles),
+      ];
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      print('Selected index: $_selectedIndex'); // Log untuk debug
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    print('Building MyHomePage with index $_selectedIndex'); // Log untuk debug
     return Scaffold(
       appBar: AppBar(
         title: Text('Aplikasi Berita'),
       ),
       body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
+        child: _widgetOptions().elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
