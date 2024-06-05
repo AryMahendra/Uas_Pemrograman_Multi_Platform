@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'pages/home_page.dart';  
+import 'pages/home_page.dart';
+import 'pages/bookmark_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,7 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   static List<Widget> _widgetOptions = <Widget>[
     HomePageContent(),
-    // Tambahkan halaman lain jika ada
+    BookmarkPage(),
   ];
 
   void _onItemTapped(int index) {
