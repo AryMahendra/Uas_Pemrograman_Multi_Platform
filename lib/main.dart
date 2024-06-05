@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'pages/home_page.dart';
 import 'pages/bookmark_page.dart';
 
@@ -46,7 +47,12 @@ class _MyHomePageState extends State<MyHomePage> {
     print('Building MyHomePage with index $_selectedIndex'); // Log untuk debug
     return Scaffold(
       appBar: AppBar(
-        title: Text('UndikNews'),
+        title: Text('UndikNews', 
+        style: GoogleFonts.getFont(
+              'Abhaya Libre',
+              fontSize: 40,
+          ),
+        ),
       ),
       body: Center(
         child: _widgetOptions().elementAt(_selectedIndex),
