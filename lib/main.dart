@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'UndikNews',
+      title: 'Aplikasi Berita',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -30,23 +30,37 @@ class _MyHomePageState extends State<MyHomePage> {
   List bookmarkedArticles = [];
 
   List<Widget> _widgetOptions() => <Widget>[
-        HomePageContent(bookmarkedArticles: bookmarkedArticles),
-        BookmarkPage(bookmarkedArticles: bookmarkedArticles),
+        HomePageContent(
+          bookmarkedArticles: bookmarkedArticles,
+          onBookmarkRemoved: (article) {
+            setState(() {
+              bookmarkedArticles.remove(article);
+            });
+          },
+        ),
+        BookmarkPage(
+          bookmarkedArticles: bookmarkedArticles,
+          onRemoveBookmark: (article) {
+            setState(() {
+              bookmarkedArticles.remove(article);
+            });
+          },
+        ),
       ];
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
-      print('Selected index: $_selectedIndex'); // Log untuk debug
+      print('Selected index: $_selectedIndex');
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    print('Building MyHomePage with index $_selectedIndex'); // Log untuk debug
+    print('Building MyHomePage with index $_selectedIndex');
     return Scaffold(
       appBar: AppBar(
-        title: Text('UndikNews'),
+        title: Text('Aplikasi Berita'),
       ),
       body: Center(
         child: _widgetOptions().elementAt(_selectedIndex),
