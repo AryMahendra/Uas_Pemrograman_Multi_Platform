@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Aplikasi Berita',
+      title: 'UndikNews',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
     print('Building MyHomePage with index $_selectedIndex'); // Log untuk debug
     return Scaffold(
       appBar: AppBar(
-        title: Text('Aplikasi Berita'),
+        title: Text('UndikNews'),
       ),
       body: Center(
         child: _widgetOptions().elementAt(_selectedIndex),
