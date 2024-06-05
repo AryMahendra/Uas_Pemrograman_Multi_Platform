@@ -31,8 +31,18 @@ class _MyHomePageState extends State<MyHomePage> {
   List bookmarkedArticles = [];
 
   List<Widget> _widgetOptions() => <Widget>[
-        HomePageContent(bookmarkedArticles: bookmarkedArticles),
-        BookmarkPage(bookmarkedArticles: bookmarkedArticles),
+        HomePageContent(
+          bookmarkedArticles: bookmarkedArticles,
+          onBookmarkRemoved: (Map<dynamic, dynamic> bookmark) {
+            // Implement the logic for removing bookmark
+          },
+        ),
+        BookmarkPage(
+          bookmarkedArticles: bookmarkedArticles,
+          onRemoveBookmark: (Map<dynamic, dynamic> bookmark) {
+            // Implement the logic for removing bookmark
+          },
+        ),
       ];
 
   void _onItemTapped(int index) {
@@ -47,10 +57,11 @@ class _MyHomePageState extends State<MyHomePage> {
     print('Building MyHomePage with index $_selectedIndex'); // Log untuk debug
     return Scaffold(
       appBar: AppBar(
-        title: Text('UndikNews', 
-        style: GoogleFonts.getFont(
-              'Abhaya Libre',
-              fontSize: 40,
+        title: Text(
+          'UndikNews',
+          style: GoogleFonts.getFont(
+            'Abhaya Libre',
+            fontSize: 24,
           ),
         ),
       ),
