@@ -24,14 +24,11 @@ class _HomePageContentState extends State<HomePageContent> {
     print('Building HomePageContent'); // Log untuk debug
     return SingleChildScrollView(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            margin: EdgeInsets.fromLTRB(0, 0, 0, 345),
-            decoration: BoxDecoration(
-              border: Border.all(color: Color(0x7DD9D9D9)),
-            ),
-            child: Container(
-              padding: EdgeInsets.fromLTRB(0, 31.5, 0.6, 32.5),
+            padding: EdgeInsets.symmetric(vertical: 32.5),
+            child: Center(
               child: Text(
                 'Berita Terkini',
                 style: GoogleFonts.getFont(
@@ -42,20 +39,6 @@ class _HomePageContentState extends State<HomePageContent> {
                   color: Color(0xFF000000),
                 ),
               ),
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.all(16.0),
-            child: Text(
-              'Sedang Tren',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.all(16.0),
-            child: Text(
-              'Berita Baru',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
           ListView.builder(
