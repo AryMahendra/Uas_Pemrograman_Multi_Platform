@@ -29,6 +29,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
   List bookmarkedArticles = [];
+  List readArticles = []; // List artikel yang sudah dibaca
 
   List<Widget> _widgetOptions() => <Widget>[
         HomePageContent(
@@ -39,6 +40,8 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         BookmarkPage(
           bookmarkedArticles: bookmarkedArticles,
+          readArticles:
+              readArticles, // Mengirimkan readArticles ke BookmarkPage
           onRemoveBookmark: (Map<dynamic, dynamic> bookmark) {
             // Implement the logic for removing bookmark
           },

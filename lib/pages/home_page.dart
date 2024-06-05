@@ -5,8 +5,10 @@ class HomePageContent extends StatefulWidget {
   final List bookmarkedArticles;
   final Function(Map) onBookmarkRemoved;
 
-  HomePageContent(
-      {required this.bookmarkedArticles, required this.onBookmarkRemoved});
+  HomePageContent({
+    required this.bookmarkedArticles,
+    required this.onBookmarkRemoved,
+  });
 
   @override
   _HomePageContentState createState() => _HomePageContentState();
@@ -14,19 +16,36 @@ class HomePageContent extends StatefulWidget {
 
 class _HomePageContentState extends State<HomePageContent> {
   List articles = [
-    {'title': 'Berita 1', 'description': 'Deskripsi berita 1'},
-    {'title': 'Berita 2', 'description': 'Deskripsi berita 2'},
-    {'title': 'Berita 3', 'description': 'Deskripsi berita 3'},
+    {
+      'title':
+          'Prof Sri Subawa Dilantik Kembali Jadi Rektor Undiknas, Berjanji Tambah terus Prodi dan Tingkatkan Kapasitas dan Kualitas Dosen',
+      'description':
+          'Acara pelantikan Rektor Universitas Pendidikan Nasional untuk periode kedua 2024-2029 berlangsung dengan suasana meriah dihadiri oleh civitas akademika Undiknas, jajaran pejabat Universitas, para pendiri, termasuk tamu undangan yang berasal dari berbagai institusi yang ada di wilayah Bali.',
+      'image': 'assets/images/image1.jpg'
+    },
+    {
+      'title': 'Mahasiswa Undiknas Ajak Generasi Z Ikut Pemilu 2024',
+      'description':
+          'Ajakan agar generasi Z untuk menggunakan hak pilih di Pemilu 2024 pun digalakkan Mahasiswa Undiknas Denpasar.Ajakan itu disampaikan Mahasiswa Undiknas saat mengikuti podcast di Studio RRI Kota Denpasar dengan tema "Peran Mahasiswa Bali dalam Pemilu 2024" pada Senin 12 Februari 2024.Artikel ini telah tayang di Tribun-Bali.com dengan judul Mahasiswa Undiknas Ajak Generasi Z Ikut Pemilu 2024.',
+      'image': 'assets/images/image2.jpg'
+    },
+    {
+      'title':
+          'KKN Tematik Pemilu Mahasiswa Undiknas Turut Sukseskan Pemilu 2024',
+      'description':
+          'Di Kota Denpasar, partisipasi para mahasiswa dari Universitas Pendidikan Nasional (Undiknas) menjadi contoh nyata kontribusi kaum muda dalam menyukseskan Pemilu 2024. Sebanyak 765 mahasiswa diterjunkan ke seluruh wilayah Denpasar untuk melakukan sosialisasi dan membantu penyelenggara di tingkat desa/kelurahan dan kecamatan.',
+      'image': 'assets/images/image3.jpg'
+    },
   ];
 
   @override
   Widget build(BuildContext context) {
-    print('Building HomePageContent'); // Log untuk debug
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
+    print('Building HomePageContent');
+
+    return CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(
+          child: Container(
             padding: EdgeInsets.symmetric(vertical: 32.5),
             child: Center(
               child: Text(
@@ -41,14 +60,37 @@ class _HomePageContentState extends State<HomePageContent> {
               ),
             ),
           ),
-          ListView.builder(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: articles.length,
-            itemBuilder: (context, index) {
+        ),
+        SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (context, index) {
               return ListTile(
-                title: Text(articles[index]['title']),
-                subtitle: Text(articles[index]['description']),
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                leading: AspectRatio(
+                  aspectRatio: 1, // Untuk mempertahankan aspek rasio gambar
+                  child: Image.asset(
+                    articles[index]['image'],
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                title: Text(
+                  articles[index]['title'],
+                  style: GoogleFonts.getFont(
+                    'Roboto',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                subtitle: Padding(
+                  padding: EdgeInsets.only(top: 8),
+                  child: Text(
+                    articles[index]['description'],
+                    style: TextStyle(fontSize: 14),
+                  ),
+                ),
                 trailing: IconButton(
                   icon: Icon(
                     Icons.bookmark_border,
@@ -69,9 +111,10 @@ class _HomePageContentState extends State<HomePageContent> {
                 ),
               );
             },
+            childCount: articles.length,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
