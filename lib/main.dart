@@ -61,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
           'UndikNews',
           style: GoogleFonts.getFont(
             'Abhaya Libre',
-            fontSize: 24,
+            fontSize: 40,
           ),
         ),
       ),
